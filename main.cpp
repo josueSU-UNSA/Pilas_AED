@@ -49,6 +49,7 @@ public:
     bool push(T dato){
         if(!tope){
             this->tope=new Node<T>(dato);
+            //cout<<this->tope->dato<<" -> ";
             return true;
         }
         else{
@@ -58,15 +59,15 @@ public:
                 if(aux->dato==dato){
                     return false;
                 }
-                cout<<aux->dato<<" -> ";
+                //cout<<aux->dato<<" -> ";
                 aux=aux->anterior;
             }
-            cout<<aux->dato<<" -> ";
+            //cout<<aux->dato<<" -> ";
             
             if(aux->dato!=dato){
                 aux->anterior=new Node<T>(dato);
-                cout<<aux->anterior->dato<<" -> ";
-                cout<<endl;
+                //cout<<aux->anterior->dato<<" -> ";
+                //cout<<endl;
                 return true;
             }
             return false;
@@ -92,6 +93,7 @@ public:
         }
     }
     */
+   /*
     bool pop(){
         if(!tope){
             return false;
@@ -99,13 +101,32 @@ public:
         else{
 
             Node<T>*aux=this->tope;
+            cout<<this->tope->dato<<" -> ";
             this->tope=aux->anterior;
             delete aux;
             return true;
 
         }
     }
+*/
+    bool pop(Node<T>*aux){
+        if(!tope){
+            return false;
+        }
+        else{
 
+            
+            
+            this->tope=aux->anterior;
+            delete aux;
+            return true;
+
+        }
+    }
+    bool pop(){
+        pop(this->tope);
+    }
+    
     bool isEmpty(){
         if(this->tope==0){
             return true;
@@ -116,11 +137,24 @@ public:
     T top(){
         return (this->tope)? this->tope->dato:0;
     }
-    void print(){
+    
+    void print( ){
         if(isEmpty()==true){
             return;
         }
+        else{
+            pila<T>*aux=new pila<T>;//pila dinamica
+            Node<T>*i=this->tope;
+            while(i){
 
+                aux->push(i->dato);
+                cout<<i->dato<<" -> ";
+                aux->pop();
+                i=i->anterior;
+
+            }
+            delete aux;
+        }
     }
 
 };
@@ -137,9 +171,8 @@ int main(){
     testPila.push(10);
     testPila.push(11);
     testPila.push(12);
+    cout<<"Print "<<endl;
+    testPila.print();
     getch();
     return 0;
 }
-
-
-
