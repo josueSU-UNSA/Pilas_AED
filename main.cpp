@@ -104,6 +104,7 @@ public:
             cout<<this->tope->dato<<" -> ";
             this->tope=aux->anterior;
             delete aux;
+            cout<<" ";
             return true;
 
         }
